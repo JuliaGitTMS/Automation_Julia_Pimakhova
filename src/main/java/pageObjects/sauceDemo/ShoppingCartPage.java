@@ -16,6 +16,7 @@ public class ShoppingCartPage extends BasePage {
     private final By itemPrice = By.className("inventory_item_price");
     private final By continueShoppingButton = By.name("continue-shopping");
     private final By checkOutButton = By.id(("checkout"));
+    private final By allItems = By.id("inventory_sidebar_link");
 
     public void verifyPage() {
         Assert.assertEquals(getWebDriver().findElement(header).getText(), "Swag Labs");
@@ -24,6 +25,14 @@ public class ShoppingCartPage extends BasePage {
 
     public void removeProduct(Integer index) {
         click(driver.findElements(itemsList).get(index).findElement(removeButton));
+    }
+    public void removeProduct(String productName) {
+        for (int i=0; i<this.countProducts(); i++){
+            if (driver.findElements(itemName).get(i).getText().equals(productName)){
+                click(driver.findElements(itemsList).get(i).findElement(removeButton));
+                break;
+            }
+        }
     }
 
     public int countProducts() {
@@ -34,11 +43,21 @@ public class ShoppingCartPage extends BasePage {
         return driver.findElements(itemsList).get(index).findElement(itemName).getText();
     }
 
+    public void checkIfCartIsEmpty() {
+       Assert.assertEquals(this.countProducts(),0);
+    }
+
     public String verifyProductPrice(Integer index) {
         return driver.findElements(itemsList).get(index).findElement(itemPrice).getText();
     }
 
-    public void pressCheckout (){
+    public void pressCheckout() {
         click(checkOutButton);
+    }
+
+    public void gotoAllItems() {
+        this.click(menu);
+        wait.until(ExpectedConditions.elementToBeClickable(allItems));
+        this.click(allItems);
     }
 }
