@@ -1,5 +1,7 @@
 package lesson9_sauceDemoTest;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -18,13 +20,15 @@ public class SauceDemoCartTest extends BaseTest {
     public void preconditions() {
         loginPage = new LoginPage();
         productPage = new ProductPage();
-        shoppingCartPage=new ShoppingCartPage();
+        shoppingCartPage = new ShoppingCartPage();
         loginPage.homePage("https://www.saucedemo.com/");
         loginPage.enterUsername(loginPage.getUsernames().get(0));
         loginPage.enterPassword(loginPage.getPassword());
         loginPage.loginClick();
     }
 
+    @Description("Add and remove product to cart Test")
+    @Step("Invocation count test")
     @Test(priority = 1, invocationCount = 5)
     public void addProductsTest() {
         productPage.addProductToCart(counter++);
@@ -35,6 +39,7 @@ public class SauceDemoCartTest extends BaseTest {
         shoppingCartPage.gotoAllItems();
     }
 
+    @Step("Data provider test")
     @Test(priority = 2, dataProvider = "item_name")
     public void addProductsTest(String name) {
         productPage.addProductToCart(name);
