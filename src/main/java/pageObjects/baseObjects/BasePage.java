@@ -5,10 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.Listeners;
+import testngUtils.Listener;
 
 import java.time.Duration;
 import java.util.Arrays;
-
+import static driver.ImprovedWebDriver.*;
 import static driver.ImprovedWebDriver.getWebDriver;
 
 public class BasePage {
