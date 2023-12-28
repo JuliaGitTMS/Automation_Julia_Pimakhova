@@ -14,13 +14,13 @@ public class SaucedemoLoginTests extends BaseTest {
     @BeforeMethod
     public void precondition() {
         loginPage = new LoginPage();
-        loginPage.homePage("https://www.saucedemo.com");
+        loginPage.homePage();
     }
 
     @Test
-    public void loginPageTest1() {
-        loginPage.enterUsername(loginPage.getUsernames().get(0));
-        loginPage.enterPassword(loginPage.getPassword());
+    public void loginPageSuccessTest() {
+        loginPage.enterUsername();
+        loginPage.enterPassword();
         loginPage.loginClick();
         loginPage.successfulLoginVerification();
     }
