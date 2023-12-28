@@ -10,9 +10,9 @@ import testngUtils.Listener;
 
 import java.time.Duration;
 import java.util.Arrays;
-
 import static driver.ImprovedWebDriver.*;
-@Listeners(Listener.class)
+import static driver.ImprovedWebDriver.getWebDriver;
+
 public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -38,13 +38,15 @@ public class BasePage {
         System.out.println("Click on element::" + element);
         element.click();
     }
-    protected void sendKeys(By by, CharSequence...charSequences){
-        System.out.println("Enter in element::"+driver.findElement(by)+" next keys: "+ Arrays.toString(charSequences));
+
+    protected void sendKeys(By by, CharSequence... charSequences) {
+        System.out.println("Enter in element::" + driver.findElement(by) + " next keys: " + Arrays.toString(charSequences));
         driver.findElement(by).clear();
         driver.findElement(by).sendKeys(charSequences);
     }
-    protected void sendKeys(WebElement element, CharSequence...charSequences){
-        System.out.println("Enter in element::"+element+" next keys: "+ Arrays.toString(charSequences));
+
+    protected void sendKeys(WebElement element, CharSequence... charSequences) {
+        System.out.println("Enter in element::" + element + " next keys: " + Arrays.toString(charSequences));
         element.clear();
         element.sendKeys(charSequences);
     }
