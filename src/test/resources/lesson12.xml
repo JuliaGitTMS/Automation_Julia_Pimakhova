@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="lesson12">
+    <parameter name="item" value="SORTABLE_DATA_TABLES"/>
+    <test name="lesson12">
+        <classes>
+            <class name="lesson12_StreamAPI.HerokuAppStartPageTest"/>
+            <class name="lesson12_StreamAPI.HerokuAppTableTest"/>
+        </classes>
+    </test>
+</suite>

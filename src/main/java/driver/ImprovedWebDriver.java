@@ -33,6 +33,9 @@ public class ImprovedWebDriver {
     }
 
     public static void quitDriver (){
-        webDriver.quit();
+        if (webDriver != null) {
+            webDriver.quit();
+            webDriver = null;
+        }
     }
 }
