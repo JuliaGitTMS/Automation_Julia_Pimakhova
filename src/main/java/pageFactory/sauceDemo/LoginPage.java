@@ -2,6 +2,7 @@ package pageFactory.sauceDemo;
 
 import entities.saucedemo.User;
 import entities.saucedemo.UserBuilder;
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 import static driver.ImprovedWebDriver.getWebDriver;
 import static propertyUtils.PropertyReader.getProperties;
 
+@Log4j
 public class LoginPage extends BasePage {
     @FindBy(className = "login_logo")
     WebElement header;
@@ -37,10 +39,13 @@ public class LoginPage extends BasePage {
         sendKeys(this.username, username);
         return this;
     }
-    public LoginPage enterUsername (User user){
+
+    public LoginPage enterUsername(User user) {
+        log.info("Enter username::" + user.getUsername());
         return enterUsername(user.getUsername());
     }
-    public LoginPage enterUsername (UserBuilder user){
+
+    public LoginPage enterUsername(UserBuilder user) {
         return enterUsername(user.getUsername());
     }
 
@@ -53,14 +58,18 @@ public class LoginPage extends BasePage {
         sendKeys(this.password, password);
         return this;
     }
+
     public LoginPage enterPassword() {
         sendKeys(this.password, getProperties().getProperty("password"));
         return this;
     }
-    public LoginPage enterPassword(User user){
+
+    public LoginPage enterPassword(User user) {
+        log.info("Enter password::" + user.getPassword());
         return enterPassword(user.getPassword());
     }
-    public LoginPage enterPassword(UserBuilder user){
+
+    public LoginPage enterPassword(UserBuilder user) {
         return enterPassword(user.getPassword());
     }
 
