@@ -1,5 +1,6 @@
 package pageObjects.sauceDemo;
 
+import lombok.extern.log4j.Log4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -10,7 +11,7 @@ import static driver.ImprovedWebDriver.getWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.lang.model.element.Element;
-
+@Log4j
 public class ProductPage extends BasePage {
     private final By header = By.className("app_logo");
     private final By menu = By.id("react-burger-menu-btn");
@@ -55,7 +56,7 @@ public class ProductPage extends BasePage {
 
     public void verifyBadgeCart(String index) {
         wait.until(ExpectedConditions.textToBe(shoppingCartBadge, index));
-        System.out.println("Number of products in cart:: " + driver.findElement(shoppingCart).getText());
+        log.info("Number of products in cart:: " + driver.findElement(shoppingCart).getText());
     }
 
     public void removeAddedProduct(Integer index) {
