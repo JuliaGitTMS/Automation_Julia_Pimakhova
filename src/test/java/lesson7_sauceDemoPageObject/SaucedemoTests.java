@@ -1,5 +1,6 @@
 package lesson7_sauceDemoPageObject;
 
+import entities.saucedemo.User;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -21,8 +22,12 @@ public class SaucedemoTests extends BaseTest {
         paymentInformationPage = new PaymentInformationPage();
         finalPayingPage = new FinalPayingPage();
         loginPage.homePage("https://www.saucedemo.com");
-        loginPage.enterUsername(loginPage.getUsernames().get(0));
-        loginPage.enterPassword(loginPage.getPassword());
+        loginPage.enterUsername(new User() {{
+            setUsername(loginPage.getUsernames().get(0));
+        }});
+        loginPage.enterPassword(new User() {{
+            setPassword(loginPage.getPassword());
+        }});
         loginPage.loginClick();
     }
 
@@ -50,9 +55,9 @@ public class SaucedemoTests extends BaseTest {
     @Test (priority = 3)
     public void paymentTest (){
         shoppingCartPage.pressCheckout();
-        paymentInformationPage.enterFirstName("Peter");
-        paymentInformationPage.enterLastName("Parker");
-        paymentInformationPage.enterPostalCode("12345");
+        paymentInformationPage.enterFirstName(new User() {{setFirstName("Peter");}});
+        paymentInformationPage.enterLastName(new User() {{setLastName("Parker");}});
+        paymentInformationPage.enterPostalCode(new User() {{setPostalCode("12345");}});
         paymentInformationPage.pressContinue();
         finalPayingPage.pressFinish();
         finalPayingPage.successfulPaymentVerification();

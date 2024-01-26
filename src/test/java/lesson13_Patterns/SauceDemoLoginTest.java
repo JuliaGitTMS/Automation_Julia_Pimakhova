@@ -54,8 +54,8 @@ public class SauceDemoLoginTest extends BaseTest {
 
     @Test
     public void userBuilderLoginTest() {
-        loginPage.enterUsername(new UserBuilder.Builder().withUsername("standard_user").build())
-                 .enterPassword(new UserBuilder.Builder().withPassword("secret_sauce").build())
+        loginPage.enterUsername(UserBuilder.builder().withUsername("standard_user").build())
+                 .enterPassword(UserBuilder.builder().withPassword("secret_sauce").build())
                  .loginClick()
                  .successfulLoginVerification();
     }

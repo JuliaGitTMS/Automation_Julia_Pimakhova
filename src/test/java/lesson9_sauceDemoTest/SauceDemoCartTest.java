@@ -1,5 +1,6 @@
 package lesson9_sauceDemoTest;
 
+import entities.saucedemo.User;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.testng.annotations.BeforeClass;
@@ -22,8 +23,12 @@ public class SauceDemoCartTest extends BaseTest {
         productPage = new ProductPage();
         shoppingCartPage = new ShoppingCartPage();
         loginPage.homePage("https://www.saucedemo.com/");
-        loginPage.enterUsername(loginPage.getUsernames().get(0));
-        loginPage.enterPassword(loginPage.getPassword());
+        loginPage.enterUsername(new User() {{
+            setUsername(loginPage.getUsernames().get(0));
+        }});
+        loginPage.enterPassword(new User() {{
+            setPassword(loginPage.getPassword());
+        }});
         loginPage.loginClick();
     }
 

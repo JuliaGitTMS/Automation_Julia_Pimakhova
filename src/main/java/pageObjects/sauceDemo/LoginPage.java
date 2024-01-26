@@ -1,5 +1,6 @@
 package pageObjects.sauceDemo;
 
+import entities.saucedemo.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pageObjects.baseObjects.BasePage;
@@ -22,13 +23,18 @@ public class LoginPage extends BasePage {
     public void enterUsername(String username) {
         sendKeys(this.username, username);
     }
-
+    public void enterUsername(User user) {
+        sendKeys(this.username, user.getUsername());
+    }
     public void enterUsername() {
         sendKeys(this.username, getProperties().getProperty("username"));
     }
 
     public void enterPassword(String password) {
         sendKeys(this.password, password);
+    }
+    public void enterPassword(User user) {
+        sendKeys(this.password, user.getPassword());
     }
 
     public void enterPassword() {

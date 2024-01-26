@@ -1,5 +1,6 @@
 package lesson9_sauceDemoTest;
 
+import entities.saucedemo.User;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.testng.annotations.BeforeMethod;
@@ -20,11 +21,11 @@ public class SauceDemoLoginTest extends BaseTest {
     @Description("Enter userName and password")
     @Step("Standard_user testing ")
     @Test(dataProvider = "userName_&_password")
-    public void loginTest(String name, String password, String loginStatus) {
-        loginPage.enterUsername(name);
-        loginPage.enterPassword(password);
+    public void loginTest(User user) {
+        loginPage.enterUsername(user.getUsername());
+        loginPage.enterPassword(user.getPassword());
         loginPage.loginClick();
-        if (loginStatus.equals("success")) {
+        if (user.getStatus().equals("success")) {
             loginPage.successfulLoginVerification();
         } else {
             loginPage.unSuccessfulLoginVerification();
@@ -34,10 +35,26 @@ public class SauceDemoLoginTest extends BaseTest {
     @DataProvider(name = "userName_&_password")
     public Object[][] getData() {
         return new Object[][]{
-                {"standard_user", "secret_sauce", "success"},
-                {"standard_user", "", "fail"},
-                {"", "secret_sauce", "fail"},
-                {"standard_user", "standard_user", "fail"}
+                {new User() {{
+                    setUsername("standard_user");
+                    setPassword("secret_sauce");
+                    setStatus("success");
+                }}},
+                {new User() {{
+                    setUsername("standard_user");
+                    setPassword("");
+                    setStatus("fail");
+                }}},
+                {new User() {{
+                    setUsername("");
+                    setPassword("secret_sauce");
+                    setStatus("fail");
+                }}},
+                {new User() {{
+                    setUsername("standard_user");
+                    setPassword("standard_user");
+                    setStatus("fail");
+                }}},
         };
     }
 }
